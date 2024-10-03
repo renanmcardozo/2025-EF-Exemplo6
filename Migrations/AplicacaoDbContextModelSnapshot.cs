@@ -45,6 +45,45 @@ namespace EF.Exemplo6.Migrations
                     b.ToTable("Autor");
                 });
 
+            modelBuilder.Entity("EF.Exemplo6.Endereco", b =>
+                {
+                    b.Property<int>("EnderecoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EnderecoID"));
+
+                    b.Property<int>("AutorID")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("CEP")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)");
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<string>("Logradouro")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)");
+
+                    b.Property<string>("UF")
+                        .IsRequired()
+                        .HasMaxLength(2)
+                        .HasColumnType("character varying(2)");
+
+                    b.HasKey("EnderecoID");
+
+                    b.HasIndex("AutorID")
+                        .IsUnique();
+
+                    b.ToTable("Endereco");
+                });
+
             modelBuilder.Entity("EF.Exemplo6.Livro", b =>
                 {
                     b.Property<string>("ISBN")
@@ -71,15 +110,34 @@ namespace EF.Exemplo6.Migrations
                     b.ToTable("Livro");
                 });
 
+            modelBuilder.Entity("EF.Exemplo6.Endereco", b =>
+                {
+                    b.HasOne("EF.Exemplo6.Autor", "Autor")
+                        .WithOne("Endereco")
+                        .HasForeignKey("EF.Exemplo6.Endereco", "AutorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Autor");
+                });
+
             modelBuilder.Entity("EF.Exemplo6.Livro", b =>
                 {
                     b.HasOne("EF.Exemplo6.Autor", "Autor")
-                        .WithMany()
+                        .WithMany("Livros")
                         .HasForeignKey("AutorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Autor");
+                });
+
+            modelBuilder.Entity("EF.Exemplo6.Autor", b =>
+                {
+                    b.Navigation("Endereco")
+                        .IsRequired();
+
+                    b.Navigation("Livros");
                 });
 #pragma warning restore 612, 618
         }

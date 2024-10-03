@@ -1,9 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace EF.Exemplo6;
 
 public class AplicacaoDbContext : DbContext
 {
+    public DbSet<Autor> Autor { get; set; }
+    public DbSet<Endereco> Endereco { get; set; }
+    public DbSet<Livro> Livro { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
@@ -18,5 +23,6 @@ public class AplicacaoDbContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new LivroConfiguration());
         modelBuilder.ApplyConfiguration(new AutorConfiguration());
+        modelBuilder.ApplyConfiguration(new EnderecoConfiguration());
     }
 }
