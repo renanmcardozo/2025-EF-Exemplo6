@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EF.Exemplo6;
@@ -9,6 +10,7 @@ public class Livro
     public string Titulo { get; set; }
     public int? Paginas { get; set; }
     public Autor Autor { get; set; }
+    public ICollection<LivroGenero> Generos { get; set; }
 }
 
 public class LivroConfiguration : IEntityTypeConfiguration<Livro>
