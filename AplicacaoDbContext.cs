@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace EF.Exemplo6;
 
@@ -14,6 +15,9 @@ public class AplicacaoDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
+        // var logSql = new LoggerFactory();
+        // logSql.AddProvider(new MeuLogProvider());
+        // optionsBuilder.UseLoggerFactory(logSql);
         optionsBuilder.UseNpgsql(@"Host=192.168.56.101;" +
                                  "Username=biblioteca;" +
                                  "Password=123456;" +
