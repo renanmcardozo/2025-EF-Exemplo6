@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EF.Exemplo6.Migrations
 {
     /// <inheritdoc />
-    public partial class InclusaodegeneroNparalivrosM : Migration
+    public partial class miau : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
